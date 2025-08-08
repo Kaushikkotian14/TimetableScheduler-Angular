@@ -48,8 +48,11 @@ console.log(this.timetable);
      controls.forEach(controlName => {
     const currentValue = this.form.get(controlName)?.value;
     this.form.get(controlName)?.setValue(  this.date+'T'+currentValue);
+
   });
       // this.form.setValue('this.date)
+      if(!this.date){
+    this.form.get('date').setValue(this.date);}
      this.timetable=this.form.value;
       
       this.timetableService.addData(this.timetable).subscribe({

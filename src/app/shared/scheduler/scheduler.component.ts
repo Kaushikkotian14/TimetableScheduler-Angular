@@ -1,4 +1,4 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component,OnInit,Input,ViewChild,ElementRef } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarOptions } from '@fullcalendar/core';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import { TimetableService } from 'src/app/service/timetable.service';
 import { Timetable } from '../models/timetable.model';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 
 interface TableColumn {
@@ -20,6 +21,7 @@ interface TableColumn {
   styleUrls: ['./scheduler.component.css']
 })
 export class SchedulerComponent implements OnInit {
+ @ViewChild('input') inputElement: FullCalendarComponent;
   timetable:Timetable[]=[];
  @Input() time:Timetable[]=[];
  showdialog :boolean=false;
@@ -33,11 +35,13 @@ export class SchedulerComponent implements OnInit {
 ];
 
 
+
+
 constructor(private timetableService:TimetableService){}
 
   ngOnInit(): void {
      this.getData();
-    this.updateEvent(this.time);
+    
     console.log('s',this.time);
   }
 
@@ -50,15 +54,15 @@ constructor(private timetableService:TimetableService){}
     plugins: [ dayGridPlugin, timeGridPlugin, listPlugin,interactionPlugin ],
     initialView: 'dayGridMonth',
     customButtons: {
-      myCustomButton: {
-        text: 'Add ',
+      addSchedule: {
+        text: 'Add Schedule',
         click: this.dialogShow.bind(this) 
-      } 
+      }
     },
     headerToolbar: {
-      left: 'today',
+      left:'',
       center: 'prev title next',
-      right: 'myCustomButton dayGridMonth timeGridWeek listMonth'
+      right: ''
       // ,timeGridDay,
     },
      
@@ -80,6 +84,7 @@ constructor(private timetableService:TimetableService){}
     },
 
     events:[],
+  
 
   eventContent: function(arg) {
    const formatTime = (date: Date | null): string => {
@@ -111,19 +116,15 @@ constructor(private timetableService:TimetableService){}
 getData(){
   this.timetableService.getData().subscribe(timetable => {
     this.timetable = timetable;
-    this.updateEvent(this.timetable);
+    this.calendarOptions = {
+      ...this.calendarOptions,
+      events: this.timetable
+    };
   });
 console.log(this.timetable);
 }
 
-// to add event attribute in calenderoptions
- updateEvent(timetable:Timetable[]){
-this.calendarOptions = {
-      ...this.calendarOptions,
-      events: this.timetable
-    };
-    console.log("update",this.timetable)
-}
+
 
 //hide and show dialogbox and calender
 dialogShow(arg:any){
@@ -131,6 +132,10 @@ this.showdialog=!this.showdialog
 this.date=arg.dateStr;
 console.log(arg);
    console.log(arg.dateStr);
+}
+
+radio(input:string){
+  this.inputElement.getApi().changeView(input);
 }
 
 

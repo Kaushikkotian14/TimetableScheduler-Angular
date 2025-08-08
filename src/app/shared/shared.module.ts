@@ -23,6 +23,7 @@ import { TableComponent } from './table/table.component';
 import {MatTabsModule} from '@angular/material/tabs';
  import { MatTableModule } from '@angular/material/table';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio';
  
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MatDatepicker } from '@angular/material/datepicker';
     MatIconModule,
     MatTabsModule,
     MatTableModule,
-   MatDatepickerModule
+   MatDatepickerModule,
+   MatRadioModule
 
 
 
@@ -78,7 +80,8 @@ import { MatDatepicker } from '@angular/material/datepicker';
     MatTableModule,
    MatTabsModule,
    TableComponent,
-   DialogComponent
+   DialogComponent,
+   MatRadioModule
   ],
   
 })

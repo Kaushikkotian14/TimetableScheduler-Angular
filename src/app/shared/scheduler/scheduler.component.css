@@ -1,7 +1,19 @@
 .calender{
+  margin-top: 20px;
     width:100%;
     height:100%;
     justify-content: center;
+}
+
+.title{
+  margin-top: 20px;
+  font-size:xx-large ;
+  margin-left: 26%;
+}
+
+.radio{
+  font-size:17px ;
+
 }
 
 :host ::ng-deep .fc-daygrid-event {
@@ -14,12 +26,29 @@
   
 }
 
-:host ::ng-deep .fc-header-toolbar .fc-toolbar-chunk {
+:host ::ng-deep .fc-toolbar-chunk {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  
+  
 }
 
-/* :host ::ng-deep .fc-view-harness{
+:host ::ng-deep   .fc-header-toolbar{
+height:2%;
+width:100%;
+  
+}
+/*  */
 
-} */
+:host ::ng-deep  .fc-scrollgrid-sync-table {
+background-color: #d5e6f6;
+
+}
+
+:host ::ng-deep .fc-col-header{
+   background-color: rgb(251, 244, 230);
+   
+}
