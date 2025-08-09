@@ -1,3 +1,8 @@
+.header{
+margin-top: 50px;
+
+}
+
 .calender{
   margin-top: 20px;
     width:100%;
@@ -6,15 +11,27 @@
 }
 
 .title{
-  margin-top: 20px;
+  
   font-size:xx-large ;
-  margin-left: 26%;
+  margin-left: 23%;
+  
+}
+
+.tableButton{
+  margin-top: 20px;
+  margin-left: 28%;
 }
 
 .radio{
   font-size:17px ;
 
 }
+
+/* .table{
+  margin-top: 20px;
+  width: 100%;
+  height: 100%;
+} */
 
 :host ::ng-deep .fc-daygrid-event {
   background-color: #1976d2;  
@@ -31,9 +48,7 @@
   flex-wrap: nowrap;
   align-items: center;
   margin-right: 10px;
-  margin-left: 10px;
-  
-  
+  margin-left: 10px; 
 }
 
 :host ::ng-deep   .fc-header-toolbar{

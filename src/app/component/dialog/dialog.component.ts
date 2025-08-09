@@ -2,11 +2,11 @@ import { Component,Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Inject } from '@angular/core';
-import { Timetable } from '../shared/models/timetable.model';
-import { TimetableService } from '../service/timetable.service';
+import { Timetable} from 'src/app/shared/models/timetable.model';
+import { TimetableService } from 'src/app/service/timetable.service';
  import { MatSnackBar } from '@angular/material/snack-bar';
-
-
+import {Router} from '@angular/router';
+import {inject} from '@angular/core';
 
 
 
@@ -18,7 +18,9 @@ import { TimetableService } from '../service/timetable.service';
 export class DialogComponent {
   form :FormGroup; 
   timetable:Timetable[]=[]
-  @Input() date= '';
+ date= localStorage.getItem('date') || '';
+route= inject(Router);
+
  constructor(
 
     private fb: FormBuilder,
@@ -29,7 +31,7 @@ export class DialogComponent {
       title: [ '', [Validators.required]],
        start:['',[Validators.required]],
         end:['',[Validators.required]],
-        date:['']
+       date:[this.date]
     });
   }
 
@@ -57,14 +59,18 @@ console.log(this.timetable);
       
       this.timetableService.addData(this.timetable).subscribe({
         next:()=>{
-         alert("Book Added Sucessfully!!");
+
          this.getData();
         }
         
         
       })
       this.form.reset()
-      location.reload();
+      this.snackBar.open('Schedule added successfully!', 'Close', {
+        duration: 2000,
+      });
+      this.route.navigate(['']);
+      localStorage.removeItem('date');
       console.log(this.form);
       console.log(this.timetable);
       
@@ -72,7 +78,12 @@ console.log(this.timetable);
   }
 
   cancel(){
-    location.reload();
+    localStorage.removeItem('date');
+    this.form.reset();
+    this.snackBar.open('Schedule cancelled!', 'Close', {
+      duration: 2000,
+    });
+    this.route.navigate(['']);
   }
   
 }

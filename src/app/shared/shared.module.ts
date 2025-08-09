@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
-import { SchedulerComponent } from './scheduler/scheduler.component';
-import { DialogComponent } from '../dialog/dialog.component';
-
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -24,12 +21,13 @@ import {MatTabsModule} from '@angular/material/tabs';
  import { MatTableModule } from '@angular/material/table';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
- 
+
+
 @NgModule({
   declarations: [
-    SchedulerComponent,
-     DialogComponent,
-     TableComponent
+     TableComponent,
+
+     
   ],
   imports: [
     CommonModule,
@@ -38,6 +36,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatFormFieldModule,
     MatNativeDateModule,
     FullCalendarModule,
+    HttpClientModule,
     MatDialogModule,
     MatFormFieldModule,
     FormsModule,
@@ -62,12 +61,15 @@ import { MatRadioModule } from '@angular/material/radio';
   exports:[
     CommonModule,
     SharedRoutingModule,
-    SchedulerComponent,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
+    
+    TableComponent,
     FullCalendarModule,
     HttpClientModule,
+
+
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule, 
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
@@ -79,8 +81,6 @@ import { MatRadioModule } from '@angular/material/radio';
     MatIconModule,
     MatTableModule,
    MatTabsModule,
-   TableComponent,
-   DialogComponent,
    MatRadioModule
   ],
   

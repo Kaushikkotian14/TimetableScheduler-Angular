@@ -5,8 +5,10 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 
+import {Router} from '@angular/router';
+import {inject} from '@angular/core';
 import { TimetableService } from 'src/app/service/timetable.service';
-import { Timetable } from '../models/timetable.model';
+import { Timetable } from 'src/app/shared/models/timetable.model';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 
 
@@ -25,7 +27,7 @@ export class SchedulerComponent implements OnInit {
   timetable:Timetable[]=[];
  @Input() time:Timetable[]=[];
  showdialog :boolean=false;
- showTable:boolean=false;
+ table:boolean=false;
  date:string='';
  columns:string[]=['date','title','start','end'];
   column: TableColumn[] = [
@@ -33,7 +35,7 @@ export class SchedulerComponent implements OnInit {
   { name: 'start', header: 'Start Date' },
   { name: 'end', header: 'End Date' }
 ];
-
+route= inject(Router);
 
 
 
@@ -45,10 +47,8 @@ constructor(private timetableService:TimetableService){}
     console.log('s',this.time);
   }
 
-  // used to open/close dialog box
-  dialog(){
-    this.showdialog=!this.showdialog    
-  }
+
+  
  
     calendarOptions: CalendarOptions = {
     plugins: [ dayGridPlugin, timeGridPlugin, listPlugin,interactionPlugin ],
@@ -124,14 +124,16 @@ getData(){
 console.log(this.timetable);
 }
 
-
-
 //hide and show dialogbox and calender
 dialogShow(arg:any){
-this.showdialog=!this.showdialog
-this.date=arg.dateStr;
+localStorage.setItem('date', arg.dateStr);
+this.route.navigate(['/add-schedule']);
 console.log(arg);
    console.log(arg.dateStr);
+}
+
+showTable(){
+  this.table=!this.table;
 }
 
 radio(input:string){
