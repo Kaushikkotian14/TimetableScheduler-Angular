@@ -78,31 +78,30 @@ constructor(private timetableService:TimetableService){}
     dateClick:this.dialogShow.bind(this),
 
    eventClick: (arg) => {
-      const start = arg.event.start;
-      const end = arg.event.end;
-      alert(`Subject: ${arg.event.title}\n Time: ${arg.event.start?.toString().padStart(2,'0')} - ${end}`);
+      
+      alert(`Subject: ${arg.event.title}\n Time: ${arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
     },
 
     events:[],
   
 
   eventContent: function(arg) {
-   const formatTime = (date: Date | null): string => {
-    if (!date) return '';
-    let h = date.getHours();
-    const m = date.getMinutes().toString().padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12 || 12;
-    return `${h}:${m} ${ampm}`;
-  }
+  //  const formatTime = (date: Date | null): string => {
+  //   if (!date) return '';
+  //   let h = date.getHours();
+  //   const m = date.getMinutes().toString().padStart(2, '0');
+  //   const ampm = h >= 12 ? 'PM' : 'AM';
+  //   h = h % 12 || 12;
+  //   return `${h}:${m} ${ampm}`;
+  // }
 
-  const start = formatTime(arg.event.start);
-  const end = formatTime(arg.event.end);
+  // const start = formatTime(arg.event.start);
+  // const end = formatTime(arg.event.end);
       
   return {
     html: `
  <mat-container class="custom-event">
-        <mat-container  class="event-time">${start} - ${end}</mat-container >
+        <mat-container  class="event-time">${arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</mat-container >
         <mat-container  class="event-title">${arg.event.title}</mat-container >
       </mat-container>
     `

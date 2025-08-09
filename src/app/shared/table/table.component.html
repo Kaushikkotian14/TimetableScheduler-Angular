@@ -3,7 +3,19 @@
 
 <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
           <th  mat-header-cell *matHeaderCellDef >  {{ column | titlecase}}</th>
-    <td mat-cell *matCellDef="let element"> {{ column === 'start' || column === 'end' ? formatTime(element[column]) : element[column] }}
+    <td mat-cell *matCellDef="let element">
+      
+       <ng-container *ngIf="column === 'date'">
+      {{ element[column] | date }}
+    </ng-container>
+
+ <ng-container *ngIf="column === 'start' || column === 'end'">
+      {{ element[column] | date: 'h:mm a' }}
+    </ng-container>
+
+    <ng-container *ngIf="column !== 'start' && column !== 'end' && column !== 'date'">
+      {{ element[column] }}
+    </ng-container>
     </td>
     </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>

@@ -1,14 +1,14 @@
 
-
-
 <ng-container class="header">
-  <mat-radio-group aria-label="Select an option" class="radio">
+    <button mat-raised-button color="primary" (click)="showTable()" class="tableButton">{{!table? 'Show Table':'Hide Table'}}</button>
+  
+<span   class="title"><strong>Schedule Timetable</strong> </span>
+
+<mat-radio-group *ngIf="!table" aria-label="Select an option" class="radiobtn">
 <mat-radio-button  (click)="radio('listMonth')" ><strong class="radio">List</strong> </mat-radio-button>
   <mat-radio-button  (click)="radio('dayGridWeek')" ><strong class="radio">Week</strong> </mat-radio-button>
     <mat-radio-button   (click)="radio('dayGridMonth')"><strong class="radio">Month</strong></mat-radio-button>
 </mat-radio-group>
-<span   class="title"><strong>Schedule Timetable</strong> </span>
-  <button mat-raised-button color="primary" (click)="showTable()" class="tableButton">{{!table? 'Show Table':'Hide Table'}}</button>
 </ng-container >
 
 
