@@ -21,12 +21,10 @@
 
 .radio{
   font-size:17px ;
+  margin-left:20%;
 }
 
-.radiobtn{
-margin-left: 20%;
 
-}
 
 :host ::ng-deep .fc-daygrid-event {
   background-color: #1976d2;  

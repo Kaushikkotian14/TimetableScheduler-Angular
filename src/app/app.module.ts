@@ -9,12 +9,14 @@ import { SharedModule } from './shared/shared.module';
 import { SharedRoutingModule } from './shared/shared-routing.module';
 import {DialogComponent} from '../app/component/dialog/dialog.component';
 import { SchedulerComponent } from '../app/component/scheduler/scheduler.component';
+import { EventDialogComponent } from './component/event-dialog/event-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     SchedulerComponent,
-    DialogComponent
+    DialogComponent,
+    EventDialogComponent
     
   ],
   imports: [

@@ -10,7 +10,8 @@ import {inject} from '@angular/core';
 import { TimetableService } from 'src/app/service/timetable.service';
 import { Timetable } from 'src/app/shared/models/timetable.model';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-
+import { EventDialogComponent } from '../event-dialog/event-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface TableColumn {
   name: string;
@@ -29,7 +30,7 @@ export class SchedulerComponent implements OnInit {
  showdialog :boolean=false;
  table:boolean=false;
  date:string='';
- columns:string[]=['date','title','start','end'];
+ columns:string[]=['date','title','professor','roomNo','start','end'];
   column: TableColumn[] = [
   { name: 'title', header: 'Event Title' },
   { name: 'start', header: 'Start Date' },
@@ -39,17 +40,12 @@ route= inject(Router);
 
 
 
-constructor(private timetableService:TimetableService){}
+constructor(private timetableService:TimetableService, private dialog:MatDialog){}
 
   ngOnInit(): void {
-     this.getData();
-    
-    console.log('s',this.time);
+     this.getData();    
   }
 
-
-  
- 
     calendarOptions: CalendarOptions = {
     plugins: [ dayGridPlugin, timeGridPlugin, listPlugin,interactionPlugin ],
     initialView: 'dayGridMonth',
@@ -78,38 +74,35 @@ constructor(private timetableService:TimetableService){}
     dateClick:this.dialogShow.bind(this),
 
    eventClick: (arg) => {
+            this.dialog.open(EventDialogComponent, {
+        width: '300px',
+        data: {
+          title: arg.event.title,
+          date: arg.event.start.toLocaleDateString(),
+          professor: arg.event.extendedProps['professor'],
+          roomNo: arg.event.extendedProps['roomNo'],
+          start: arg.event.start,
+          end: arg.event.end,
+        }
+    
+      });
       
-      alert(`Subject: ${arg.event.title}\n Time: ${arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
+
     },
 
     events:[],
   
-
   eventContent: function(arg) {
-  //  const formatTime = (date: Date | null): string => {
-  //   if (!date) return '';
-  //   let h = date.getHours();
-  //   const m = date.getMinutes().toString().padStart(2, '0');
-  //   const ampm = h >= 12 ? 'PM' : 'AM';
-  //   h = h % 12 || 12;
-  //   return `${h}:${m} ${ampm}`;
-  // }
-
-  // const start = formatTime(arg.event.start);
-  // const end = formatTime(arg.event.end);
-      
   return {
     html: `
- <mat-container class="custom-event">
+ <mat-container >
         <mat-container  class="event-time">${arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</mat-container >
         <mat-container  class="event-title">${arg.event.title}</mat-container >
       </mat-container>
     `
   }
 }
-
 }
-
 
     //  to get data from service
 getData(){
@@ -127,8 +120,7 @@ console.log(this.timetable);
 dialogShow(arg:any){
 localStorage.setItem('date', arg.dateStr);
 this.route.navigate(['/add-schedule']);
-console.log(arg);
-   console.log(arg.dateStr);
+    console.log("d",arg);
 }
 
 showTable(){
@@ -136,9 +128,8 @@ showTable(){
 }
 
 radio(input:string){
-  this.inputElement.getApi().changeView(input);
+  this.inputElement.getApi().changeView(input); 
 }
-
 
 }
 

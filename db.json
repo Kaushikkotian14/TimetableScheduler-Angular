@@ -5,42 +5,45 @@
       "start": "2025-08-07T10:00",
       "end": "2025-08-07T12:30",
       "id": "e1ee",
-      "date": "2025-08-07"
+      "date": "2025-08-07",
+      "professor": "Dr. Sharma",
+      "roomNo": "101"
     },
     {
       "id": "801b",
       "title": "Maths",
       "start": "2025-08-08T10:00",
       "end": "2025-08-08T11:00",
-      "date": "2025-08-08"
+      "date": "2025-08-08",
+      "professor": "Dr. Gupta",
+      "roomNo": "102"
     },
     {
       "id": "885a",
-      "title": "Sceince",
+      "title": "Science",
       "start": "2025-08-13T03:00",
       "end": "2025-08-13T03:30",
-      "date": "2025-08-13"
+      "date": "2025-08-13",
+      "professor": "Dr. Mehta",
+      "roomNo": "103"
     },
     {
       "id": "5d18",
       "title": "Hindi",
       "start": "2025-08-13T04:00",
       "end": "2025-08-13T05:00",
-      "date": "2025-08-13"
+      "date": "2025-08-13",
+      "professor": "Dr. Verma",
+      "roomNo": "104"
     },
     {
       "id": "b0da",
-      "title": "Germany",
+      "title": "German",
       "start": "2025-08-13T22:00",
       "end": "2025-08-13T22:30",
-      "date": "2025-08-13"
-    },
-    {
-      "id": "48df",
-      "title": "test",
-      "start": "2025-08-21T12:30",
-      "end": "2025-08-21T13:00",
-      "date": "2005-08-09"
+      "date": "2025-08-13",
+      "professor": "Dr. Rao",
+      "roomNo": "105"
     }
   ]
 }

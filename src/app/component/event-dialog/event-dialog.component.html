@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Schedule Details</h2>
+<mat-dialog-content>
+  <p><strong>Subject:</strong> {{ data.title }}</p>
+  <p><strong>Date:</strong> {{ data.date | date: 'shortDate' }}</p>
+  <p><strong>Professor:</strong> {{ data.professor }}</p>
+  <p><strong>Room No:</strong> {{ data.roomNo }}</p>
+  <p><strong>Time:</strong> {{ data.start | date: 'h:mm a' }}-{{ data.end | date: 'h:mm a' }}</p>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

@@ -4,6 +4,6 @@ export interface Timetable{
     title:string;
     start: Date | string;
     end: Date | string;
-    pro:string;
-    rno:number;
+    professor:string;
+    roomNo:number;
 }

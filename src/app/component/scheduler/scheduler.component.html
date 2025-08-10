@@ -1,10 +1,10 @@
 
 <ng-container class="header">
-    <button mat-raised-button color="primary" (click)="showTable()" class="tableButton">{{!table? 'Show Table':'Hide Table'}}</button>
+    <button mat-raised-button color="primary" (click)="showTable()" class="tableButton">{{!table? 'Show Table':'Show Calender'}}</button>
   
 <span   class="title"><strong>Schedule Timetable</strong> </span>
 
-<mat-radio-group *ngIf="!table" aria-label="Select an option" class="radiobtn">
+<mat-radio-group *ngIf="!table" aria-label="Select an option" class="radio">
 <mat-radio-button  (click)="radio('listMonth')" ><strong class="radio">List</strong> </mat-radio-button>
   <mat-radio-button  (click)="radio('dayGridWeek')" ><strong class="radio">Week</strong> </mat-radio-button>
     <mat-radio-button   (click)="radio('dayGridMonth')"><strong class="radio">Month</strong></mat-radio-button>

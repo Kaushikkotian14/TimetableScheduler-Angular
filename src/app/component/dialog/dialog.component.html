@@ -10,25 +10,34 @@
     <input matInput placeholder="Enter Schedule" formControlName="title" />
   </mat-form-field><br>
 
+    <mat-form-field>
+    <mat-label>Professor</mat-label>
+    <input matInput placeholder="Enter Professor Name" formControlName="professor" />
+  </mat-form-field><br>
+
+    <mat-form-field>
+    <mat-label>Room No:</mat-label>
+    <input matInput placeholder="Enter Room No" formControlName="roomNo" />
+  </mat-form-field><br>
+
  <mat-form-field>
     <mat-label>Select Start Time</mat-label>
-    <input matInput type="time" formControlName="start" />
+    <input matInput type="time" formControlName="start"  />
   </mat-form-field><br>
+
   <mat-form-field>
     <mat-label>Select End Time</mat-label>
-    <input matInput type="time" formControlName="end" />
+    <input matInput type="time" formControlName="end"  />
   </mat-form-field><br>
+
     <mat-form-field>
   <mat-label *ngIf="!!date">Choose a date</mat-label>
   <input matInput [matDatepicker]="picker" formControlName="date">
-  <mat-hint>MM/DD/YYYY</mat-hint>
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 <br>
 <br>
-  
-  
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Add</button><br><br>
      <button mat-raised-button color="primary" (click)="cancel()" >Cancel</button><br><br>
     

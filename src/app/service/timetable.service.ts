@@ -17,8 +17,8 @@ private apiUrl = 'http://localhost:3000';
     return this.http.get<Timetable[]>(`${this.apiUrl}/Timetable`);
   }
 
-  addData(table:Timetable[]):Observable<Timetable[]>{
-     return this.http.post<Timetable[]>(`${this.apiUrl}/Timetable`,table);
+  addData(table:Timetable[]):Observable<Timetable>{
+     return this.http.post<Timetable>(`${this.apiUrl}/Timetable`,table);
   }
 
 
