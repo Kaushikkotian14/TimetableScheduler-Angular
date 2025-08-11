@@ -74,7 +74,7 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
     dateClick:this.dialogShow.bind(this),
 
    eventClick: (arg) => {
-            this.dialog.open(EventDialogComponent, {
+       const dialogRef =     this.dialog.open(EventDialogComponent, {
         width: '300px',
         data: {
           title: arg.event.title,
@@ -83,11 +83,20 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
           roomNo: arg.event.extendedProps['roomNo'],
           start: arg.event.start,
           end: arg.event.end,
-        }
-    
+          id:arg.event._def.publicId,
+        },
+       
+        
       });
-      
-
+      if(dialogRef.componentInstance.delete.subscribe((data)=>{
+         if(data){
+      const StoredE = this.calendarOptions.events as Timetable[]
+      const newArray = StoredE.filter((p)=> p.id !== arg.event._def.publicId)
+      this.calendarOptions.events = [...newArray]
+         }
+      }))
+      return
+  // console.log("event",arg)
     },
 
   eventContent: function(arg) {

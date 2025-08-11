@@ -7,6 +7,7 @@ import { TimetableService } from 'src/app/service/timetable.service';
  import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {inject} from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 
 
@@ -48,22 +49,35 @@ msg:string='';
 console.log(this.timetable);
 }
 
-checkTime() {
-  if (this.form.get('start') && this.form.get('end') && this.form.get('end') <= this.form.get('start')) {
-    this.msg="Invalid Endtime";
-    alert("Invalid Endtime")
-    this.form.get('end')?.reset();
-  }
-}
+// checkTime() {
+//   let e= this.form.get('end').value
+//   let s = this.form.get('start').value
+//   //let ne = (this.form.get('end') as AbstractControl).value.split('T')[1];
+//   //let ns = (this.form.get('end') as AbstractControl).value.split('T')[1]; 
+// console.log(e,s);
+
+//   if ( e <= s) {
+//     this.msg="Invalid Endtime";
+//     alert("Invalid Endtime")
+//     this.form.get('end')?.reset();
+//    }
+// }
  
 //add data to db.json
   onSubmit() {
-  
+      let e= this.form.get('end').value
+  let s = this.form.get('start').value
     if (this.form.valid) {
       const controls = [ 'start', 'end'];
      controls.forEach(controlName => {
     const currentValue = this.form.get(controlName)?.value;
     this.form.get(controlName)?.setValue( this.date+'T'+currentValue);
+     
+ if ( e <= s) {
+    this.msg="Invalid Endtime";
+    alert("Invalid Endtime")
+    this.form.get('end')?.reset();
+   }
 
     if(this.date===''){
     this.form.get('date').setValue(this.date.split('T')[0]);}
@@ -84,8 +98,8 @@ checkTime() {
       });
       this.route.navigate(['']);
       localStorage.removeItem('date');
-      console.log(this.form);
-      console.log(this.timetable);
+      // console.log(this.form);
+      // console.log(this.timetable);
       
     }
   }

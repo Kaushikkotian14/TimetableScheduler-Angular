@@ -21,5 +21,9 @@ private apiUrl = 'http://localhost:3000';
      return this.http.post<Timetable>(`${this.apiUrl}/Timetable`,table);
   }
 
+  deleteData(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Timetable/${id}`);
+  }
+
 
 }
