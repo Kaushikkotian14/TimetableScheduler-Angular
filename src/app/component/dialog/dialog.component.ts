@@ -18,11 +18,9 @@ import {inject} from '@angular/core';
 export class DialogComponent {
   form :FormGroup; 
   timetable:Timetable[]=[]
- date= localStorage.getItem('date') || '';
+ date= localStorage.getItem('date');
 route= inject(Router);
-startT="";
-endT="";
-
+msg:string='';
 
   // Method to handle the form submission
  constructor(
@@ -37,8 +35,7 @@ endT="";
       roomNo: [ '', [Validators.required]],
        start:['',[Validators.required]],
         end:['',[Validators.required]],
-       date:[this.date]
-
+       date:[this.date ? this.date : '' ]
     });
     
   }
@@ -50,34 +47,28 @@ endT="";
   });
 console.log(this.timetable);
 }
+
 checkTime() {
-  if (this.startT && this.endT && this.endT <= this.startT) {
-    alert("End time must be greater than Start time");
-    this.endT = '';
+  if (this.form.get('start') && this.form.get('end') && this.form.get('end') <= this.form.get('start')) {
+    this.msg="Invalid Endtime";
+    alert("Invalid Endtime")
     this.form.get('end')?.reset();
   }
 }
  
 //add data to db.json
   onSubmit() {
-    
-
+  
     if (this.form.valid) {
       const controls = [ 'start', 'end'];
      controls.forEach(controlName => {
     const currentValue = this.form.get(controlName)?.value;
-    this.form.get(controlName)?.setValue(  this.date+'T'+currentValue);
+    this.form.get(controlName)?.setValue( this.date+'T'+currentValue);
 
-    if(!this.date){
+    if(this.date===''){
     this.form.get('date').setValue(this.date.split('T')[0]);}
      this.timetable=this.form.value;
-  });
-
-  
-  
-
-      // this.form.setValue('this.date)
-      
+  });  
       
       this.timetableService.addData(this.timetable).subscribe({
         next:()=>{

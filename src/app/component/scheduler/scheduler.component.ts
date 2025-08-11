@@ -90,14 +90,12 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
 
     },
 
-    events:[],
-  
   eventContent: function(arg) {
   return {
     html: `
  <mat-container >
-        <mat-container  class="event-time">${arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</mat-container >
-        <mat-container  class="event-title">${arg.event.title}</mat-container >
+        <mat-container >${arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</mat-container >
+        <mat-container >${arg.event.title}</mat-container ><br>
       </mat-container>
     `
   }

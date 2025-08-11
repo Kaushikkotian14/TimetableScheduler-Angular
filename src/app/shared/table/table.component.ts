@@ -1,6 +1,11 @@
 import { Component,Input } from '@angular/core';
 import { Timetable } from '../models/timetable.model';
 
+interface TableColumn {
+  name: string;
+  header: string;
+}
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',

@@ -10,7 +10,7 @@
 .title{
   
   font-size:xx-large ;
-  margin-left: 11%
+  margin-left: 13%
 }
 
 .tableButton{
@@ -38,7 +38,6 @@
 
 :host ::ng-deep .fc-toolbar-chunk {
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
   margin-right: 10px;
   margin-left: 10px; 

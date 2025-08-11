@@ -19,7 +19,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 
-
 @NgModule({
   declarations: [
      TableComponent,

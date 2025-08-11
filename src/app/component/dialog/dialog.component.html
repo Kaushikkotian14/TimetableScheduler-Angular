@@ -27,8 +27,9 @@
 
   <mat-form-field>
     <mat-label>Select End Time</mat-label>
-    <input matInput type="time" formControlName="end"  />
+    <input matInput type="time" formControlName="end" (change)="checkTime()" />
   </mat-form-field><br>
+  <!-- <ng-container class="error" [ngStyle]="{'color':'red'}" > {{msg}}</ng-container> <br><br> -->
 
     <mat-form-field>
   <mat-label *ngIf="!!date">Choose a date</mat-label>
