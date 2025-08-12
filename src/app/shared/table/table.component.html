@@ -1,5 +1,12 @@
- 
- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+<br>
+<mat-form-field class="search"> 
+<mat-label>Search</mat-label>
+ <input matInput  type="text" placeholder="Search by subject, professor,room Number" [(ngModel)]="searchTerm" (ngModelChange)="search()" >
+</mat-form-field>
+
+
+
+ <table mat-table [dataSource]="filter" class="mat-elevation-z8 demo-table" >
 
 <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
           <th  mat-header-cell *matHeaderCellDef >  {{ column | titlecase}}</th>
@@ -9,16 +16,25 @@
       {{ element[column] | date }}
     </ng-container>
 
- <ng-container *ngIf="column === 'start' || column === 'end'">
-      {{ element[column] | date: 'h:mm a' }}
+ <ng-container *ngIf="column === 'timing'">
+      {{ element['start'] | date: 'h:mm a' }} - {{ element['end'] | date: 'h:mm a' }}
     </ng-container>
 
+     <ng-container *ngIf="column === 'subject'">
+      {{ element['title']}}
+    </ng-container>
+      <ng-container *ngIf="column === 'room no'">
+      {{ element['roomNo']}}
+    </ng-container>
     <ng-container *ngIf="column !== 'start' && column !== 'end' && column !== 'date'">
       {{ element[column] }}
     </ng-container>
+
     </td>
     </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
-
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"  class="body"></tr>
 </table>
+<div *ngIf="noItem">
+        <p class="noItem">No schedule found for {{ searchTerm }}.</p>
+</div>

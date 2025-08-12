@@ -49,19 +49,15 @@ msg:string='';
 console.log(this.timetable);
 }
 
-// checkTime() {
-//   let e= this.form.get('end').value
-//   let s = this.form.get('start').value
-//   //let ne = (this.form.get('end') as AbstractControl).value.split('T')[1];
-//   //let ns = (this.form.get('end') as AbstractControl).value.split('T')[1]; 
-// console.log(e,s);
-
-//   if ( e <= s) {
-//     this.msg="Invalid Endtime";
-//     alert("Invalid Endtime")
-//     this.form.get('end')?.reset();
-//    }
-// }
+checkTime() {
+  let e=new Date(`2000-01-01T${this.form.get('end').value}`) 
+  let s =new Date(`2000-01-01T${this.form.get('start').value}`)
+  if ( e.getTime() <= s.getTime()) {
+    this.msg="Invalid Endtime";
+    alert("Invalid Endtime")
+    this.form.get('end')?.reset();
+   }
+}
  
 //add data to db.json
   onSubmit() {
@@ -73,11 +69,6 @@ console.log(this.timetable);
     const currentValue = this.form.get(controlName)?.value;
     this.form.get(controlName)?.setValue( this.date+'T'+currentValue);
      
- if ( e <= s) {
-    this.msg="Invalid Endtime";
-    alert("Invalid Endtime")
-    this.form.get('end')?.reset();
-   }
 
     if(this.date===''){
     this.form.get('date').setValue(this.date.split('T')[0]);}
@@ -86,11 +77,8 @@ console.log(this.timetable);
       
       this.timetableService.addData(this.timetable).subscribe({
         next:()=>{
-
          this.getData();
-        }
-        
-        
+        }           
       })
       this.form.reset()
       this.snackBar.open('Schedule added successfully!', 'Close', {
@@ -104,6 +92,7 @@ console.log(this.timetable);
     }
   }
 
+  //to getback to schedular component
   cancel(){
     localStorage.removeItem('date');
     this.form.reset();

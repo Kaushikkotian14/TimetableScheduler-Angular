@@ -1,4 +1,8 @@
-
+/* .header{
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+} */
 
 .calender{
   margin-top: 20px;
@@ -10,18 +14,22 @@
 .title{
   
   font-size:xx-large ;
-  margin-left: 13%
+  margin-left: 11%
+  
 }
 
 .tableButton{
   margin-top: 20px;
   margin-right: 20%;
   margin-left: 1%;
+  width:160px;
+  height:50px;
 }
 
 .radio{
-  font-size:17px ;
+  font-size:20px ;
   margin-left:20%;
+  margin-right:12px;
 }
 
 
@@ -55,7 +63,17 @@ background-color: #d5e6f6;
 
 }
 
-:host ::ng-deep .fc-col-header{
-   background-color: rgb(251, 244, 230);
-   
+:host ::ng-deep .fc-scroller .fc-col-header  {
+   background-color: rgb(226, 236, 171);
+   height:50px;
 }
+
+:host ::ng-deep .fc-col-header-cell-cushion{
+  font-size: large;
+  margin-top:5%;
+}
+
+:host ::ng-deep .fc-daygrid-day-number{
+  font-size: large;
+}
+

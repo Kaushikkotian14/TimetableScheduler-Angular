@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { TableComponent } from './table/table.component';
+import { FormsModule } from '@angular/forms';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,6 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatNativeDateModule,
     FullCalendarModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
 
     MatDialogModule,
@@ -53,6 +55,7 @@ import { MatRadioModule } from '@angular/material/radio';
     TableComponent,
     FullCalendarModule,
     HttpClientModule,
+    FormsModule,
     
     MatNativeDateModule,
     MatDatepickerModule,  

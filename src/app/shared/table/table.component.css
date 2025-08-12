@@ -1,4 +1,30 @@
 .header{
-    background-color: rgb(240, 247, 245);
+    background-color: rgb(189, 252, 234);
     font-size: x-large;
+}
+
+.body{
+  background-color: rgb(239, 247, 196);
+  font-size:large;
+}
+
+.table{
+     background-color: rgb(255, 250, 206);
+}
+
+.search{
+   width: 400px;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-bottom: 1%;
+   
+}
+
+.noItem{
+     width: 400px;
+        margin-left: 40%;
+    margin-top: 1%;
+    font-size:xx-large;
+    color:rgb(127, 127, 243) ;
+
 }

@@ -3,6 +3,7 @@ mat-card{
     max-width:400px;
     margin : 20px auto;
     align-items: center;
+     background-color: rgb(180, 226, 237);
 }
 button{
     width: 100%;

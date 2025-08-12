@@ -30,12 +30,7 @@ export class SchedulerComponent implements OnInit {
  showdialog :boolean=false;
  table:boolean=false;
  date:string='';
- columns:string[]=['date','title','professor','roomNo','start','end'];
-  column: TableColumn[] = [
-  { name: 'title', header: 'Event Title' },
-  { name: 'start', header: 'Start Date' },
-  { name: 'end', header: 'End Date' }
-];
+ columns:string[]=['date','subject','professor','room no','timing'];
 route= inject(Router);
 
 
@@ -45,7 +40,7 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
   ngOnInit(): void {
      this.getData();    
   }
-
+ 
     calendarOptions: CalendarOptions = {
     plugins: [ dayGridPlugin, timeGridPlugin, listPlugin,interactionPlugin ],
     initialView: 'dayGridMonth',
@@ -57,7 +52,7 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
     },
     headerToolbar: {
       left:'',
-      center: 'prev title next',
+      center: 'prevYear prev title next nextYear',
       right: ''
       // ,timeGridDay,
     },
@@ -71,8 +66,11 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
     select: function(info) {
       // alert('selected ' + info.startStr + ' to ' + info.endStr);
     },
-    dateClick:this.dialogShow.bind(this),
 
+    // when clicked on date Add schedule form is open to add task
+    dateClick:this.dialogShow.bind(this),
+ 
+    // when clicked on event dialog box should appear
    eventClick: (arg) => {
        const dialogRef =     this.dialog.open(EventDialogComponent, {
         width: '300px',
@@ -84,10 +82,10 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
           start: arg.event.start,
           end: arg.event.end,
           id:arg.event._def.publicId,
-        },
-       
+        },    
         
       });
+
       if(dialogRef.componentInstance.delete.subscribe((data)=>{
          if(data){
       const StoredE = this.calendarOptions.events as Timetable[]
@@ -95,10 +93,11 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
       this.calendarOptions.events = [...newArray]
          }
       }))
-      return
+  return
   // console.log("event",arg)
     },
-
+    
+  // modify displayed contents on calender
   eventContent: function(arg) {
   return {
     html: `
@@ -125,15 +124,25 @@ console.log(this.timetable);
 
 //hide and show dialogbox and calender
 dialogShow(arg:any){
+  const today = new Date();
+  const d = new Date(arg.dateStr)
+  console.log(today,d);
+  
+  if(d>= today){
 localStorage.setItem('date', arg.dateStr);
 this.route.navigate(['/add-schedule']);
     console.log("d",arg);
 }
 
-showTable(){
-  this.table=!this.table;
 }
 
+// toggle between calender and table
+showTable(){
+  this.table=!this.table;
+  this.getData();
+}
+
+// to pass radio input to fullcalender component
 radio(input:string){
   this.inputElement.getApi().changeView(input); 
 }

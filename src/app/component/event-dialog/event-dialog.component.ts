@@ -17,15 +17,19 @@ timetable:Timetable[]=[];
     console.log('ed',this.data)
   }
   
+
+  // to close dialog box
   close(): void {
     this.dialogRef.close();
   }
 
+  // to detdata from service
   getData(){
    this.timeTable.getData().subscribe(timetable => {
     this.timetable = timetable;})
   }
 
+  // to delete data  
   deleteData(id:string) {
     if (confirm('Are you sure you want to delete this schedule?')) {
       this.delete.emit(true)
