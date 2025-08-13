@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Inject } from '@angular/core';
@@ -7,7 +7,7 @@ import { TimetableService } from 'src/app/service/timetable.service';
  import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {inject} from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -16,16 +16,17 @@ import { AbstractControl } from '@angular/forms';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent {
+export class DialogComponent  {
   form :FormGroup; 
   timetable:Timetable[]=[]
  date= localStorage.getItem('date');
 route= inject(Router);
 msg:string='';
 
+// 
+
   // Method to handle the form submission
  constructor(
-
     private fb: FormBuilder,
     private timetableService: TimetableService,
     private snackBar: MatSnackBar
@@ -40,6 +41,10 @@ msg:string='';
     });
     
   }
+
+
+
+// }
 
   //get data from service
   getData(){

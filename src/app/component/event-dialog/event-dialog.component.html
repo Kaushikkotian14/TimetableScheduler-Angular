@@ -5,9 +5,10 @@
   <p><strong>Professor:</strong> {{ data.professor }}</p>
   <p><strong>Room No:</strong> {{ data.roomNo }}</p>
   <p><strong>Time:</strong> {{ data.start | date: 'h:mm a' }}-{{ data.end | date: 'h:mm a' }}</p>
-  
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">Close</button>
+  <!-- <button mat-button (click)="edit(data.id)">Edit</button> -->
   <button mat-button  color="warn"  (click)="deleteData(data.id)">Delete</button>
 </mat-dialog-actions>

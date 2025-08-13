@@ -72,7 +72,7 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
  
     // when clicked on event dialog box should appear
    eventClick: (arg) => {
-       const dialogRef =     this.dialog.open(EventDialogComponent, {
+       const dialogRef = this.dialog.open(EventDialogComponent, {
         width: '300px',
         data: {
           title: arg.event.title,
@@ -85,7 +85,7 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
         },    
         
       });
-
+           
       if(dialogRef.componentInstance.delete.subscribe((data)=>{
          if(data){
       const StoredE = this.calendarOptions.events as Timetable[]
@@ -93,8 +93,8 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
       this.calendarOptions.events = [...newArray]
          }
       }))
+      console.log("event",arg)
   return
-  // console.log("event",arg)
     },
     
   // modify displayed contents on calender
@@ -104,8 +104,7 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
  <mat-container >
         <mat-container >${arg.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${arg.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</mat-container >
         <mat-container >${arg.event.title}</mat-container ><br>
-      </mat-container>
-    `
+      </mat-container>    `
   }
 }
 }
@@ -123,11 +122,14 @@ console.log(this.timetable);
 }
 
 //hide and show dialogbox and calender
-dialogShow(arg:any){
+dialogShow(arg){
   const today = new Date();
   const d = new Date(arg.dateStr)
-  console.log(today,d);
-  
+   today.setHours(5);
+   today.setMinutes(29);
+   today.setSeconds(0);
+console.log(today,d);
+
   if(d>= today){
 localStorage.setItem('date', arg.dateStr);
 this.route.navigate(['/add-schedule']);
