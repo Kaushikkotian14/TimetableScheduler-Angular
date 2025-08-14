@@ -1,7 +1,11 @@
-from pymongo import MongoClient
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-client = MongoClient("mongodb://localhost:27017/")
-db_client = client["calender"]
+URL_DATABASE = 'mysql+pymysql://root:root@localhost/calender'
 
-schedule_collecction = db_client["schedule"]
- 
+engine = create_engine(URL_DATABASE)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()

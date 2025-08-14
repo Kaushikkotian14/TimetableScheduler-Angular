@@ -10,19 +10,19 @@ import { Observable } from 'rxjs';
 
 export class TimetableService {
   table:Timetable[]=[];
-private apiUrl = 'http://localhost:3000'; 
+private apiUrl = 'http://localhost:8000'; 
   constructor(private http: HttpClient) { }
 
   getData(): Observable<Timetable[]> {
-    return this.http.get<Timetable[]>(`${this.apiUrl}/Timetable`);
+    return this.http.get<Timetable[]>(`${this.apiUrl}/schedule`);
   }
 
   addData(table:Timetable[]):Observable<Timetable>{
-     return this.http.post<Timetable>(`${this.apiUrl}/Timetable`,table);
+     return this.http.post<Timetable>(`${this.apiUrl}/schedule`,table);
   }
 
   deleteData(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/Timetable/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/schedule/${id}`);
   }
 
 
