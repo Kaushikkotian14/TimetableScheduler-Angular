@@ -9,6 +9,7 @@ const routes: Routes = [
   // /{path:'table',component:TableComponent},
   {path:'', component:SchedulerComponent},
   {path:'add-schedule', component:DialogComponent},
+  {path:'add-schedule/:id', component:DialogComponent},
 
 ];
 

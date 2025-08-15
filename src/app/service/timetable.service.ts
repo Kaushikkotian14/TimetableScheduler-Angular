@@ -17,9 +17,18 @@ private apiUrl = 'http://localhost:8000';
     return this.http.get<Timetable[]>(`${this.apiUrl}/schedule`);
   }
 
+  getDataById(id: string): Observable<Timetable> {
+    return this.http.get<Timetable>(`${this.apiUrl}/schedule/${id}`);
+  }
+
   addData(table:Timetable[]):Observable<Timetable>{
      return this.http.post<Timetable>(`${this.apiUrl}/schedule`,table);
   }
+
+  updateData(id: string, table: Timetable) {
+  return this.http.put(`${this.apiUrl}/schedule/${id}`, table);
+}
+
 
   deleteData(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/schedule/${id}`);

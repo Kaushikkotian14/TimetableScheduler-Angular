@@ -6,7 +6,6 @@ import { Timetable} from 'src/app/shared/models/timetable.model';
 import { TimetableService } from 'src/app/service/timetable.service';
  import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {inject} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -16,12 +15,15 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent  {
+export class DialogComponent implements OnInit {
   form :FormGroup; 
   timetable:Timetable[]=[]
- date= localStorage.getItem('date');
-route= inject(Router);
+ date=new Date(localStorage.getItem('date')).toISOString().split('T')[0] ;
 msg:string='';
+edit = false;
+id: string;
+
+
 
 // 
 
@@ -29,7 +31,9 @@ msg:string='';
  constructor(
     private fb: FormBuilder,
     private timetableService: TimetableService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute,
+    private route: Router,
   ) {
     this.form = this.fb.group({
       title: [ '', [Validators.required]],
@@ -40,6 +44,29 @@ msg:string='';
        date:[this.date ? this.date : '' ]
     });
     
+  }
+
+  ngOnInit() {
+     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    if (this.id) {
+      this.edit = true;
+      this.loadData();
+    }
+  }
+
+  loadData() {
+   this.timetableService.getDataById(this.id).subscribe((data: any) => {
+    this.form.patchValue({
+      title: data.title,
+      professor: data.professor,
+      roomNo: data.roomNo,
+      date: data.date,
+      start: data.start.split('T')[1],
+      end: data.end.split('T')[1]
+    });
+  });
+
+
   }
 
 
@@ -55,19 +82,19 @@ console.log(this.timetable);
 }
 
 checkTime() {
-  let e=new Date(`2000-01-01T${this.form.get('end').value}`) 
-  let s =new Date(`2000-01-01T${this.form.get('start').value}`)
+  let e=new Date(`${this.date}T${this.form.get('end').value}`) 
+  let s =new Date(`${this.date}T${this.form.get('start').value}`)
   if ( e.getTime() <= s.getTime()) {
     this.msg="Invalid Endtime";
     alert("Invalid Endtime")
     this.form.get('end')?.reset();
    }
 }
+
+
  
 //add data to db.json
-  onSubmit() {
-      let e= this.form.get('end').value
-  let s = this.form.get('start').value
+    onSubmit() {
     if (this.form.valid) {
       const controls = [ 'start', 'end'];
      controls.forEach(controlName => {
@@ -79,23 +106,24 @@ checkTime() {
     this.form.get('date').setValue(this.date.split('T')[0]);}
      this.timetable=this.form.value;
   });  
-      
-      this.timetableService.addData(this.timetable).subscribe({
-        next:()=>{
-         this.getData();
-        }           
-      })
-      this.form.reset()
-      this.snackBar.open('Schedule added successfully!', 'Close', {
-        duration: 2000,
-      });
-      this.route.navigate(['']);
-      localStorage.removeItem('date');
-      // console.log(this.form);
-      // console.log(this.timetable);
+      if (this.edit) {
+        // update record
+        this.timetableService.updateData(this.id, this.form.value).subscribe(() => {
+          this.snackBar.open('Schedule updated successfully!', 'Close', { duration: 2000 });
+          this.route.navigate(['']);
+        });
+      } else {
+        // add new record
+        
+        this.timetableService.addData(this.form.value).subscribe(() => {
+          this.snackBar.open('Schedule added successfully!', 'Close', { duration: 2000 });
+          this.route.navigate(['']);
+        });
       
     }
   }
+}
+
 
   //to getback to schedular component
   cancel(){

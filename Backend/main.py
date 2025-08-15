@@ -59,13 +59,14 @@ async def addData(data: timeTable, db:db_dependency ):
     db.commit()
     db.refresh(data)
 
-@app.put("/schdeule/{id}",status_code=status.HTTP_200_OK)
+@app.put("/schedule/{id}",status_code=status.HTTP_200_OK)
 async def updateData(id:int,input: timeTable,db:db_dependency):
     data=db.query(model.timeTable).filter(model.timeTable.id == id).first()
     if data is None:
         raise HTTPException(status_code=404, details='Schedule not found')
     data.title= input.title
     data.start= input.start
+    data.date=input.date
     data.end=input.end
     data.professor=input.professor
     data.roomNo=input.roomNo

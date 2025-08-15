@@ -57,7 +57,8 @@ timetable:Timetable[]=[];
  
 edit(id:string){
   this.close();
-this.route.navigate(['/add-schedule/']);
+  localStorage.setItem('date', this.data.date);
+this.route.navigate(['/add-schedule/',this.data.id]);
 console.log(this.data);
 
 }

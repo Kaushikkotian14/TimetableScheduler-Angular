@@ -30,7 +30,7 @@
     <input matInput type="time" formControlName="end" (keyup)="checkTime()" />
   </mat-form-field><br>
   <!-- <ng-container class="error" [ngStyle]="{'color':'red'}" > {{msg}}</ng-container> <br><br> -->
-<!--  (change)="checkTime()" -->
+
     <mat-form-field>
   <mat-label *ngIf="!!date">Choose a date</mat-label>
   <input matInput [matDatepicker]="picker" formControlName="date">
