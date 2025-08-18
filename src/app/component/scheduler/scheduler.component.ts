@@ -87,6 +87,7 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
       });
            
       if(dialogRef.componentInstance.delete.subscribe((data)=>{
+        console.log(data);
          if(data){
       const StoredE = this.calendarOptions.events as Timetable[]
       const newArray = StoredE.filter((p)=> p.id !== arg.event._def.publicId)

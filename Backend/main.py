@@ -81,7 +81,7 @@ async def delete(id:int, db:db_dependency):
         raise HTTPException(status_code=404, details='Schedule not found')
     db.delete(data)
     db.commit()
-    db.refresh(data)
+    
 
 # python -m uvicorn main:app --reload
 # myenv\Scripts\activate
