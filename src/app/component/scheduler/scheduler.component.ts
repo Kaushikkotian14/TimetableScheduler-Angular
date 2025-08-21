@@ -93,9 +93,11 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
       const newArray = StoredE.filter((p)=> p.id !== arg.event._def.publicId)
       this.calendarOptions.events = [...newArray]
          }
+        
       }))
-      console.log("event",arg)
-  return
+       this.getData()
+      console.log("event",this.calendarOptions.events)
+   
     },
     
   // modify displayed contents on calender
@@ -114,12 +116,15 @@ constructor(private timetableService:TimetableService, private dialog:MatDialog)
 getData(){
   this.timetableService.getData().subscribe(timetable => {
     this.timetable = timetable;
+    console.log("e",this.timetable);
+    
     this.calendarOptions = {
       ...this.calendarOptions,
       events: this.timetable
+      
     };
   });
-console.log(this.timetable);
+// console.log("e",this.timetable);
 }
 
 //hide and show dialogbox and calender

@@ -28,28 +28,31 @@ timetable:Timetable[]=[];
 
   // to detdata from service
   getData(){
-   this.timeTable.getData().subscribe(timetable => {
-    this.timetable = timetable;})
+   this.timeTable.getData().subscribe(data => {
+    this.timetable = data;
+  console.log("d",this.timetable)})
+    // console.log(this.timetable)
   }
 
   // to delete data  
-  deleteData(id:string) {
+  deleteData(id: string) {
     if (confirm('Are you sure you want to delete this schedule?')) {
       this.delete.emit(true)
       this.timeTable.deleteData(id).subscribe(
         () => {
           this.snackBar.open('Schedule deleted successfully!', 'Close', {
-        duration: 2000,
-      });
+            duration: 2000,
+          });
           this.getData();
           this.dialogRef.close();
-          
+          // location.reload()
+
         },
         error => {
-           this.snackBar.open('Error deleting Schedule', 'Close', {
-        duration: 2000,
-      });
-          console.error( 'Error deleting Schedule:', error);
+          this.snackBar.open('Error deleting Schedule', 'Close', {
+            duration: 2000,
+          });
+          console.error('Error deleting Schedule:', error);
         }
       );
     }
